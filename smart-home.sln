@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smart-home.Server", "smart-home\Server\smart-home.Server.csproj", "{4672D8CE-4EBE-4A19-8911-A51AA8FEBCEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smart-home.Server", "smart-home\Server\smart-home.Server.csproj", "{4672D8CE-4EBE-4A19-8911-A51AA8FEBCEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smart-home.Client", "smart-home\Client\smart-home.Client.csproj", "{A29C0A8B-7181-4C93-BA6E-8F388FB151FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smart-home.Client", "smart-home\Client\smart-home.Client.csproj", "{A29C0A8B-7181-4C93-BA6E-8F388FB151FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smart-home.Shared", "smart-home\Shared\smart-home.Shared.csproj", "{BB76535B-171B-4EBA-9AEC-D23D8B08EFFD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smart-home.xUnit", "smart-home.xUnit\smart-home.xUnit.csproj", "{42589791-AA85-4D73-A2AD-1D92BA5B6D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smart-home.Shared", "smart-home\Shared\smart-home.Shared.csproj", "{BB76535B-171B-4EBA-9AEC-D23D8B08EFFD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3F352FF-EEFC-482A-B7A8-8AB5F5B00393}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "smart-home.xUnit", "smart-home\smart-home.xUnit\smart-home.xUnit.csproj", "{42F573BF-5128-4D56-857E-2F7A7F2B13E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{BB76535B-171B-4EBA-9AEC-D23D8B08EFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB76535B-171B-4EBA-9AEC-D23D8B08EFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB76535B-171B-4EBA-9AEC-D23D8B08EFFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42589791-AA85-4D73-A2AD-1D92BA5B6D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42589791-AA85-4D73-A2AD-1D92BA5B6D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42589791-AA85-4D73-A2AD-1D92BA5B6D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42589791-AA85-4D73-A2AD-1D92BA5B6D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F573BF-5128-4D56-857E-2F7A7F2B13E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F573BF-5128-4D56-857E-2F7A7F2B13E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F573BF-5128-4D56-857E-2F7A7F2B13E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F573BF-5128-4D56-857E-2F7A7F2B13E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

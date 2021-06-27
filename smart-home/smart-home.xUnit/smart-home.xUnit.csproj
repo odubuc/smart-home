@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\smart-home\Server\smart-home.Server.csproj" />
+    <ProjectReference Include="..\Server\smart-home.Server.csproj" />
   </ItemGroup>
 
 </Project>

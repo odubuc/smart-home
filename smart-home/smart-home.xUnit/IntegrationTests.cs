@@ -10,12 +10,12 @@ using System.Net.Http.Json;
 
 namespace smart_home.xUnit
 {
-    public class UnitTest1
+    public class IntegrationTests
     {
         private readonly TestServer _server;
         private readonly HttpClient _client;
 
-        public UnitTest1()
+        public IntegrationTests()
         {
             // Arrange
             _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
