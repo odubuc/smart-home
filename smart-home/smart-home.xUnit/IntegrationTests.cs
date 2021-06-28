@@ -12,44 +12,44 @@ namespace smart_home.xUnit
 {
     public class IntegrationTests
     {
-        private readonly TestServer _server;
-        private readonly HttpClient _client;
+        private readonly TestServer server;
+        private readonly HttpClient client;
 
         public IntegrationTests()
         {
             // Arrange
-            _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
-            _client = _server.CreateClient();
+            this.server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            this.client = this.server.CreateClient();
         }
+
         /*
         [Theory]
         [InlineData("GET")]
-        public void Test1(string method)
+        public void WeatherIndoor_Answer_OK(string method)
         {
             // Arange
-            //var request = new HttpRequestMessage(new HttpMethod(method), "/weatherIndoor");
+            var request = new HttpRequestMessage(new HttpMethod(method), "/weatherIndoor");
 
             // Act
-            //var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(request);
 
             // Assert
-            //response.EnsureSuccessStatusCode();
-            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        }*/
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+        */
 
-        [Theory]
-        [InlineData("GET")]
-        public async Task WeatherIndoor(string method) 
+        [Fact]
+        public async Task WeatherIndoor_Type_IsValid()
         {
-            WeatherIndoor data = await _client.GetFromJsonAsync<WeatherIndoor>("weatherIndoor");
+            WeatherIndoor data = await this.client.GetFromJsonAsync<WeatherIndoor>("weatherIndoor");
             Assert.IsType<WeatherIndoor>(data);
         }
 
-        [Theory]
-        [InlineData("GET")]
-        public async Task WeatherOutdoor(string method)
+        [Fact]
+        public async Task WeatherOutdoor_Type_IsValid()
         {
-            WeatherOutdoor[] data = await _client.GetFromJsonAsync<WeatherOutdoor[]>("weatherOutdoor");
+            WeatherOutdoor[] data = await this.client.GetFromJsonAsync<WeatherOutdoor[]>("weatherOutdoor");
             Assert.IsType<WeatherOutdoor[]>(data);
         }
     }
