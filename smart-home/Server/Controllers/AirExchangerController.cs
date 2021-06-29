@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using smart_home.Shared;
 using System;
@@ -12,21 +13,32 @@ namespace smart_home.Server.Controllers
     [Route("[controller]")]
     public class AirExchangerController : ControllerBase
     {
+        public static readonly string AirExchangerCacheKey = "air-exchanger-cache-key";
+        private readonly IMemoryCache MemoryCache;
 
-        public AirExchangerController()
+        public AirExchangerController(IMemoryCache memoryCache)
         {
-            
+            this.MemoryCache = memoryCache;
         }
 
         [HttpGet]
         public AirExchangerState Get()
         {
-            var rng = new Random();
-            return new AirExchangerState
-            {
-                State = State.OFF,
-                OnTimeRemainingMinutes = rng.Next(0, 60)
-            };
+            return this.MemoryCache.GetOrCreate<AirExchangerState>(AirExchangerController.AirExchangerCacheKey, entry => {
+                var rng = new Random();
+                return new AirExchangerState
+                {
+                    State = State.OFF,
+                    OnTimeRemainingMinutes = rng.Next(0, 60)
+                };
+            });
         }
+
+        [HttpPut]
+        public void Put(AirExchangerState AirExchangerState)
+        {
+            this.MemoryCache.Set<AirExchangerState>(AirExchangerController.AirExchangerCacheKey, AirExchangerState);
+        }
+
     }
 }
