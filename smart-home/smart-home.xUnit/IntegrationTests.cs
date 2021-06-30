@@ -77,7 +77,7 @@ namespace smart_home.xUnit
             var rng = new Random();
 
             actual.State = State.ON;
-            actual.OnTimeRemainingMinutes = rng.Next(0, 60);
+            actual.TimerMinutes = rng.Next(0, 60);
 
             await this.client.PutAsJsonAsync<AirExchangerState>("airExchanger", actual);
 

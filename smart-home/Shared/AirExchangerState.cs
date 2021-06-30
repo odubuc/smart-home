@@ -7,14 +7,14 @@ namespace smart_home.Shared
     public enum State
     {
         ON = 1,
-        OFF = 2
+        OFF = 0
     }
 
     public class AirExchangerState
     {
         public State State { get; set; }
 
-        public int OnTimeRemainingMinutes { get; set; }
+        public int TimerMinutes { get; set; }
     }
 
     
