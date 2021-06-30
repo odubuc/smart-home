@@ -6,12 +6,7 @@ namespace smart_home.Shared
 {
     public class WeatherOutdoor
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(this.TemperatureC / 0.5556);
+        public double TemperatureC { get; set; }
+        public double Humidity { get; set; }
     }
 }

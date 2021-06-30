@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using smart_home.Server.definitions;
 using System.Linq;
 
 namespace smart_home.Server
@@ -26,6 +27,9 @@ namespace smart_home.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.Configure<OpenWeatherMapSection>(Configuration.GetSection(OpenWeatherMapSection.OpenWeatherMap));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "smart-home-api", Version = "v1" });

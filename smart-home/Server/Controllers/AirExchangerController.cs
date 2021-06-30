@@ -29,7 +29,7 @@ namespace smart_home.Server.Controllers
                 return new AirExchangerState
                 {
                     State = State.OFF,
-                    OnTimeRemainingMinutes = rng.Next(0, 60)
+                    TimerMinutes = rng.Next(0, 60)
                 };
             });
         }
