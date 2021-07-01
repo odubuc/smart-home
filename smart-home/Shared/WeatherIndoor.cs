@@ -11,6 +11,6 @@ namespace smart_home.Shared
 
         public int TemperatureC { get; set; }
 
-        public int HumidityPercent { get; set; }
+        public int Humidity { get; set; }
     }
 }

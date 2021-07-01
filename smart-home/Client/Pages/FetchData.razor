@@ -15,10 +15,8 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
                 <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Humidity</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +33,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecast = await Http.GetFromJsonAsync<WeatherOutdoor>("WeatherForecast");
+        forecast = await Http.GetFromJsonAsync<WeatherOutdoor>("WeatherOutdoor");
     }
 
 }

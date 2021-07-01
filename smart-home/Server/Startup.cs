@@ -13,6 +13,8 @@ namespace smart_home.Server
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +26,21 @@ namespace smart_home.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:5001",
+                                                          "http://localhost:5004",
+                                                          "http://localhost:5005",
+                                                          "https://localhost:5001",
+                                                          "https://localhost:5004",
+                                                          "https://localhost:5005")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod(); 
+                                  });
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -59,6 +76,8 @@ namespace smart_home.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {

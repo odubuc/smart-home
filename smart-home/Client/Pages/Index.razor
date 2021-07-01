@@ -1,7 +1,134 @@
 ﻿@page "/"
+@using smart_home.Shared
+@inject HttpClient Http
 
-<h1>Hello, world!</h1>
+<p>Proof of concept</p>
 
-Welcome to your new app.
+<table class="table">
+    <thead>
+        <tr>
+            <th>Location</th>
+            <th>Temp. (C)</th>
+            <th>Humidity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>  
+            <td>Outdoor</td>
+@if(WeatherOutdoor == null)
+{
+    <td>...Loading</td>
+    <td>...Loading</td>
+}
+else
+{
+    <td>@WeatherOutdoor.TemperatureC</td>
+    <td>@WeatherOutdoor.Humidity</td>
+}
+        </tr>
+        <tr>  
+            <td>Indoor</td>
+@if(WeatherIndoor == null)
+{
+    <td>...Loading</td>
+    <td>...Loading</td>
+}
+else
+{
+    <td>@WeatherIndoor.TemperatureC</td>
+    <td>@WeatherIndoor.Humidity</td>
+}
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        </tr>
+    </tbody>
+</table>
+
+<br /><br />
+<p>Air Exchanger</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+@if(CurrentAirExchangerState == null)
+{
+    <td>...Loading</td>
+    <td>...Loading</td>
+}
+else
+{
+    <td>@CurrentState</td>
+    <td>@TimerMinute</td>
+}  
+        </tr>
+    </tbody>
+</table>
+<br /><br />
+@if (CurrentAirExchangerState != null)
+{
+    @if (CurrentState == State.OFF)
+    {
+        <button class="btn btn-primary" @onclick="onStartAirExchanger">Start Air Exchanger</button>
+        <span>For</span>
+        <input type="number" @bind="inputValue"/>
+        <span>Minute(s)</span>
+    }
+    else
+    {
+        <button class="btn btn-primary" @onclick="onStopAirExchanger">Stop Air Exchanger</button>
+    }
+}
+
+
+
+@code {
+    private WeatherOutdoor WeatherOutdoor;
+    private WeatherIndoor WeatherIndoor;
+    private AirExchangerState CurrentAirExchangerState;
+    private string inputValue = "0";
+    private State CurrentState = State.OFF;
+    private int TimerMinute = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        WeatherOutdoor = await Http.GetFromJsonAsync<WeatherOutdoor>("weatherOutdoor");
+        WeatherIndoor = await Http.GetFromJsonAsync<WeatherIndoor>("weatherIndoor");
+        CurrentAirExchangerState = await Http.GetFromJsonAsync<AirExchangerState>("airExchanger");
+        CurrentState = CurrentAirExchangerState.State;
+    }
+
+    private async void onStartAirExchanger()
+    {
+        var ExpectedAirExhangerState = new AirExchangerState
+        {
+            State = State.ON,
+            TimerMinutes = int.Parse(inputValue)
+        };
+        CurrentState = ExpectedAirExhangerState.State;
+        TimerMinute = ExpectedAirExhangerState.TimerMinutes;
+        await Http.PutAsJsonAsync<AirExchangerState>("airExchanger", ExpectedAirExhangerState);
+        CurrentAirExchangerState = await Http.GetFromJsonAsync<AirExchangerState>("airExchanger");
+        CurrentState = CurrentAirExchangerState.State;
+    }
+
+    private async void onStopAirExchanger()
+    {
+        inputValue = "0";
+        var ExpectedAirExhangerState = new AirExchangerState
+        {
+            State = State.OFF,
+            TimerMinutes = int.Parse(inputValue)
+        };
+        CurrentState = ExpectedAirExhangerState.State;
+        TimerMinute = ExpectedAirExhangerState.TimerMinutes;
+        await Http.PutAsJsonAsync<AirExchangerState>("airExchanger", ExpectedAirExhangerState);
+        CurrentAirExchangerState = await Http.GetFromJsonAsync<AirExchangerState>("airExchanger");
+        CurrentState = CurrentAirExchangerState.State;
+    }
+
+}

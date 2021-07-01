@@ -14,6 +14,13 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+/* TODO */
+/* Quick hack for proof of concept */
+.page {
+    flex-direction: unset !important;
+    display: block !important;
+}
+
 .content {
     padding-top: 1.1rem;
 }

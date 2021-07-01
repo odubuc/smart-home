@@ -26,7 +26,7 @@ namespace smart_home.Server.Controllers
             {
                 Date = DateTime.Now,
                 TemperatureC = rng.Next(-20, 55),
-                HumidityPercent = rng.Next(0, 100)
+                Humidity = rng.Next(0, 100)
             };
         }
     }

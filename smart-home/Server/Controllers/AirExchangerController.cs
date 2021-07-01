@@ -25,11 +25,10 @@ namespace smart_home.Server.Controllers
         public AirExchangerState Get()
         {
             return this.MemoryCache.GetOrCreate<AirExchangerState>(AirExchangerController.AirExchangerCacheKey, entry => {
-                var rng = new Random();
                 return new AirExchangerState
                 {
                     State = State.OFF,
-                    TimerMinutes = rng.Next(0, 60)
+                    TimerMinutes = 0
                 };
             });
         }
